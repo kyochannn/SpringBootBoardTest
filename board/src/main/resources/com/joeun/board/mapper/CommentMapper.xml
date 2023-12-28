@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.joeun.board.mapper.CommentMapper">
+    <insert id="insertComment" parameterType="com.joeun.board.dto.CommentDTO" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO comment_table (commentWriter, commentContents, boardId, commentCreatedTime)
+        VALUES (#{commentWriter}, #{commentContents}, #{boardId}, NOW())
+    </insert>
+    
+    <select id="selectCommentsByBoardId" resultType="com.joeun.board.dto.CommentDTO">
+        SELECT * FROM comment_table WHERE boardId = #{boardId} ORDER BY id DESC
+    </select>
+</mapper>
